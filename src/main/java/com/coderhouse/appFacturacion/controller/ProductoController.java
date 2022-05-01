@@ -33,7 +33,7 @@ public class ProductoController {
 	}
 	
 	@GetMapping("/getProductoById/{id}")
-	public ResponseEntity<Optional<Producto>> getProductoById(@PathVariable(value = "id") Long productoId) {
+	public ResponseEntity<Optional<Producto>> getProductoById(@PathVariable(value = "id") Long productoId) throws Exception {
 		Optional <Producto> producto = productoService.obtenerProductoPorId(productoId);
 		return ResponseEntity.ok().body(producto);
 	}

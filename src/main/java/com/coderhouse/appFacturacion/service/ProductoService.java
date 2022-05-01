@@ -15,7 +15,7 @@ public interface ProductoService {
 	
 	Producto obtenerProductoPorNombre(String nombre);
 	
-	Optional<Producto> obtenerProductoPorId(Long id);
+	Optional<Producto> obtenerProductoPorId(Long id) throws Exception;
 
 	List<Producto> obtenerTodosLosProductos();
 	

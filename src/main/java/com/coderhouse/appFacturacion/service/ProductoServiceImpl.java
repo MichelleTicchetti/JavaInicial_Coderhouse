@@ -39,8 +39,17 @@ public class ProductoServiceImpl implements ProductoService {
 		return productoRepository.findByNombre(nombre);
 	}
 	
-	public Optional<Producto> obtenerProductoPorId(Long id) {
-		return productoRepository.findById(id);
+	public Optional<Producto> obtenerProductoPorId(Long id) throws Exception {
+		
+		Optional<Producto> producto = productoRepository.findById(id);
+		
+		if(producto.isPresent()) {
+			return productoRepository.findById(id);
+		}else {
+			throw new Exception("No existe ese producto en la bd");
+		}
+
+	
 	}
 
 	public List<Producto> obtenerTodosLosProductos() {
