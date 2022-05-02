@@ -3,6 +3,7 @@ package com.coderhouse.appFacturacion.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,13 +26,13 @@ public class ItemController {
 	@Autowired
 	ItemService itemService;
 
-	@GetMapping("/getItem/{id}")
-	public ResponseEntity<Item> getItem(@PathVariable(value = "id") Long itemId) {
-		Item item = itemService.obtenerItem(itemId);
+	@GetMapping("/getItemById/{id}")
+	public ResponseEntity<Item> getItem(@PathVariable(value = "id") Long itemId) throws Exception {
+		Item item = itemService.obtenerItemPorId(itemId);
 		return ResponseEntity.ok().body(item);
 	}
 
-	@GetMapping("/items")
+	@GetMapping("/getItemsList")
 	public ResponseEntity<List<Item>> getAllItems() {
 		List<Item> itemList = itemService.obtenerTodosLosItems();
 		return ResponseEntity.ok().body(itemList);
@@ -43,15 +44,15 @@ public class ItemController {
 		return ResponseEntity.ok().body(nuevoItem);
 	}
 
-	// revisar pasar dato a ser modificado por param
+
 	@PutMapping("/updateCantidadItem")
-	public ResponseEntity<Item> updateCantidadItem(@RequestBody Item item) {
-		Item itemModificado = itemService.modificarCantidadItem(item);
-		return ResponseEntity.ok().body(itemModificado);
+	public void updateCantidadItem(@Param("id") Long id, @Param("cant") int cant) throws Exception {
+		itemService.modificarCantidadItemById(id, cant);
+		
 	}
 
 	@DeleteMapping("/deleteItem/{id}")
-	public void deleteItem(@PathVariable(value = "id") Long itemId) {
+	public void deleteItem(@PathVariable(value = "id") Long itemId) throws Exception {
 		itemService.borrarItem(itemId);
 	}
 

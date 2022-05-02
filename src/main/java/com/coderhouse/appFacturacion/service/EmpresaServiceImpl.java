@@ -1,6 +1,7 @@
 package com.coderhouse.appFacturacion.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,21 +22,25 @@ public class EmpresaServiceImpl implements EmpresaService{
 		return empresaRepository.save(empresa);
 	}
 
-	public Empresa modificarRazonSocial(Empresa empresa) {
-		Empresa empresaModificada = empresaRepository.getById(empresa.getId());
-		empresaModificada.setRazonSocial(empresa.getRazonSocial());
-		return empresaRepository.save(empresaModificada);
-
-	}
-
-	public void borrarEmpresa(Long id) {
-		Empresa empresa = empresaRepository.getById(id);
+	public void borrarEmpresa(Long id) throws Exception {
+		Empresa empresa =  obtenerEmpresaPorId(id);
 		empresaRepository.deleteById(id);
-		log.info("Se va a borrar la empresa {}",empresa.getRazonSocial());
+		log.info("Se va a borrar la empresa {}",empresa.getRazonSocial().toUpperCase());
 	}
 
-	public Empresa obtenerEmpresa(Long id) {
-		return empresaRepository.findById(id).orElseThrow(RuntimeException::new);
+	public Empresa obtenerEmpresaPorId(Long id) throws Exception {
+		
+		Optional <Empresa> empresa = empresaRepository.findById(id);
+
+		if (empresa.isPresent()) {
+			
+			return empresa.get();
+			
+		} else {
+			
+			throw new Exception("No existe esa empresa en la bd");
+		}
+		
 	}
 
 	public List<Empresa> obtenerTodasLasEmpresas() {

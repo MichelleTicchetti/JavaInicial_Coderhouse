@@ -3,6 +3,7 @@ package com.coderhouse.appFacturacion.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +26,8 @@ public class SucursalController {
 	SucursalService sucursalService;
 
 	@GetMapping("/getSucursal/{id}")
-	public ResponseEntity<Sucursal> getSucursal(@PathVariable(value = "id") Long sucursalId) {
-		Sucursal sucursal = sucursalService.obtenerSucursal(sucursalId);
+	public ResponseEntity<Sucursal> getSucursal(@PathVariable(value = "id") Long sucursalId) throws Exception {
+		Sucursal sucursal = sucursalService.obtenerSucursalPorId(sucursalId);
 		return ResponseEntity.ok().body(sucursal);
 	}
 
@@ -42,15 +43,18 @@ public class SucursalController {
 		return ResponseEntity.ok().body(nuevaSucursal);
 	}
 
-	   //revisar pasar dato a ser modificado por param
 	@PutMapping("/updateDireccionSucursal")
-	public ResponseEntity<Sucursal> updateDireccionSucursal(@RequestBody Sucursal sucursal) {
-		Sucursal sucursalModificada = sucursalService.modificarDireccion(sucursal);
-		return ResponseEntity.ok().body(sucursalModificada);
+	public void updateDireccionSucursal(@Param("id") Long id, @Param("direccion") String direccion) throws Exception {
+		sucursalService.modificarDireccionById(id, direccion);
+	}
+	
+	@PutMapping("/updateTelefonoSucursal")
+	public void updateTelefonoSucursal(@Param("id") Long id, @Param("tel") String tel) throws Exception {
+		sucursalService.modificarTelefonoById(id, tel);
 	}
 
 	@DeleteMapping("/deleteSucursal/{id}")
-	public void deleteSucursal(@PathVariable(value = "id") Long sucursalId) {
+	public void deleteSucursal(@PathVariable(value = "id") Long sucursalId) throws Exception {
 		sucursalService.borrarSucursal(sucursalId);
 	}
 	

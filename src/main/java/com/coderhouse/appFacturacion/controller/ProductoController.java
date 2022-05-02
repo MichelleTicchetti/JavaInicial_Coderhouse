@@ -26,8 +26,8 @@ public class ProductoController {
 	ProductoService productoService;
 
 	@GetMapping("/getProductoByNombre")
-	public ResponseEntity<Producto> getProductoByNombre(@Param("nombre") String nombre) {
-		Producto producto = productoService.obtenerProductoPorNombre(nombre);
+	public ResponseEntity<List<Producto>> getProductoByNombre(@Param("nombre") String nombre) {
+		List<Producto> producto = productoService.obtenerProductosPorNombre(nombre);
 		return ResponseEntity.ok().body(producto);
 	}
 	

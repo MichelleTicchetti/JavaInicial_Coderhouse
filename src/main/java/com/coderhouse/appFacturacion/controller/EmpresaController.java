@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,13 +23,13 @@ public class EmpresaController {
 	@Autowired
 	EmpresaService empresaService;
 
-	@GetMapping("/getEmpresa/id/{id}")
-	public ResponseEntity<Empresa> getEmpresa(@PathVariable(value = "id") Long empresaId) {
-		Empresa empresa = empresaService.obtenerEmpresa(empresaId);
+	@GetMapping("/getEmpresaById/{id}")
+	public ResponseEntity<Empresa> getEmpresa(@PathVariable(value = "id") Long empresaId) throws Exception {
+		Empresa empresa = empresaService.obtenerEmpresaPorId(empresaId);
 		return ResponseEntity.ok().body(empresa);
 	}
 
-	@GetMapping("/getEmpresas")
+	@GetMapping("/getEmpresasList")
 	public ResponseEntity<List<Empresa>> getAllEmpresas() {
 		List<Empresa> empresaList = empresaService.obtenerTodasLasEmpresas();
 		return ResponseEntity.ok().body(empresaList);
@@ -42,15 +41,8 @@ public class EmpresaController {
 		return ResponseEntity.ok().body(nuevaEmpresa);
 	}
 
-	//revisar pasar dato a ser modificado por param
-	@PutMapping("/updateEmpresaRazonSocial")
-	public ResponseEntity<Empresa> updateEmpresaRazonSocial(@RequestBody Empresa empresa) {
-		Empresa empresaModificada = empresaService.modificarRazonSocial(empresa);
-		return ResponseEntity.ok().body(empresaModificada);
-	}
-
 	@DeleteMapping("/deleteEmpresa/{id}")
-	public void deleteEmpresa(@PathVariable(value = "id") Long empresaId) {
+	public void deleteEmpresa(@PathVariable(value = "id") Long empresaId) throws Exception {
 		empresaService.borrarEmpresa(empresaId);
 	}
 

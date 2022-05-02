@@ -61,7 +61,7 @@ public class ClienteController {
 	   
 	   
 	   @GetMapping("/getEdadCliente/{id}")
-	   public ResponseEntity<ClienteDto> getClienteDto(@PathVariable(value = "id") Long clienteId) {
+	   public ResponseEntity<ClienteDto> getClienteDto(@PathVariable(value = "id") Long clienteId) throws Exception {
 	      ClienteDto clienteDto = clienteService.obtenerEdadClienteDto(clienteId);
 	      return ResponseEntity.ok().body(clienteDto);
 	   }

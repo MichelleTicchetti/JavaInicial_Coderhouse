@@ -1,6 +1,7 @@
 package com.coderhouse.appFacturacion.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,13 @@ public class CompraServiceImpl implements CompraService{
 		return compraRepository.save(compra);
 	}
 
-	public Compra modificarTotalCompra(Compra compra) {
-		Compra compraModificada = compraRepository.getById(compra.getId());
-		compraModificada.setPrecioTotal(compra.getPrecioTotal());
-		return compraRepository.save(compraModificada);
+	public void modificarTotalCompraById(Long id, double total) throws Exception {
+		
+		Compra compraModificada = obtenerCompraById(id);
+		
+		compraModificada.setPrecioTotal(total);
+		
+		compraRepository.save(compraModificada);
 
 	}
 
@@ -35,13 +39,23 @@ public class CompraServiceImpl implements CompraService{
 		log.info("Se va a borrar la compra {}",compra.getId());
 	}
 
-	public Compra obtenerCompra(Long id) {
-		return compraRepository.findById(id).orElseThrow(RuntimeException::new);
+	public Compra obtenerCompraById(Long id) throws Exception {
+		Optional <Compra> compra = compraRepository.findById(id);
+
+		if (compra.isPresent()) {
+			
+			return compra.get();
+			
+		} else {
+			
+			throw new Exception("No existe esa compra en la bd");
+		}
 	}
 
 	public List<Compra> obtenerTodasLasCompras() {
 		return compraRepository.findAll();
 	}
+
 
 	
 

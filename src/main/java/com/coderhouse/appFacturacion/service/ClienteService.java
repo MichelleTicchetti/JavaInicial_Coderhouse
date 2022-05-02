@@ -19,6 +19,6 @@ public interface ClienteService {
 
 	List<Cliente> obtenerTodosLosClientes();
 
-	ClienteDto obtenerEdadClienteDto(Long id);
+	ClienteDto obtenerEdadClienteDto(Long id) throws Exception;
 
 }

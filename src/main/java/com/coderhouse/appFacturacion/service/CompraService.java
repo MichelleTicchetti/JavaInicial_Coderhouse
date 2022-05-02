@@ -8,11 +8,11 @@ public interface CompraService {
 	
 	Compra crearCompra(Compra compra);
 
-	Compra modificarTotalCompra(Compra compra);
+	void modificarTotalCompraById(Long id, double total) throws Exception;
 
 	void borrarCompra(Long id);
 
-	Compra obtenerCompra(Long id);
+	Compra obtenerCompraById(Long id) throws Exception;
 
 	List<Compra> obtenerTodasLasCompras();
 

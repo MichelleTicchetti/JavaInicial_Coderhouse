@@ -1,9 +1,11 @@
 package com.coderhouse.appFacturacion.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.coderhouse.appFacturacion.entity.Item;
 import com.coderhouse.appFacturacion.repository.ItemRepository;
@@ -22,21 +24,33 @@ public class ItemServiceImpl implements ItemService {
 		return itemRepository.save(item);
 	}
 
-	public Item modificarCantidadItem(Item item) {
-		Item itemModificado = itemRepository.getById(item.getId());
-		itemModificado.setCantidad(item.getCantidad());
-		return itemRepository.save(itemModificado);
+	public void modificarCantidadItemById(Long id, int cant) throws Exception {
+		Item itemModificado = obtenerItemPorId(id);
+		itemModificado.setCantidad(cant);
+		itemRepository.save(itemModificado);
 
 	}
 
-	public void borrarItem(Long id) {
-		Item item = itemRepository.getById(id);
+	public void borrarItem(Long id) throws Exception {
+		Item item = obtenerItemPorId(id);
 		itemRepository.deleteById(id);
 		log.info("Se va a borrar el item {}",item.getId());
 	}
 
-	public Item obtenerItem(Long id) {
-		return itemRepository.findById(id).orElseThrow(RuntimeException::new);
+	public Item obtenerItemPorId(Long id) throws Exception {
+		
+		Optional <Item> item = itemRepository.findById(id);
+
+		if (item.isPresent()) {
+			
+			return item.get();
+			
+		} else {
+			
+			throw new Exception("No existe ese item de compra en la bd");
+		}
+
+		
 	}
 
 	public List<Item> obtenerTodosLosItems() {

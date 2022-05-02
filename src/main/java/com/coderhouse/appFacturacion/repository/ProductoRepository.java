@@ -12,7 +12,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long>{
 	
 	public Producto findById(int id);
 	public List<Producto> findAll();
-	public Producto findByNombre(String nombre);
+	public List<Producto> findAllByNombre(String nombre);
 	public List<Producto> findByPlataforma(String plataforma);
 	public Producto findByPrecio(double precio);
 	public List<Producto> findByCategoria(String categoria);

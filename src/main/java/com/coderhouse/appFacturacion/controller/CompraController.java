@@ -3,6 +3,7 @@ package com.coderhouse.appFacturacion.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,14 +25,14 @@ public class CompraController {
 	@Autowired
 	   CompraService compraService;
 
-	   @GetMapping("/getCompra/id/{id}")
-	   public ResponseEntity<Compra> getCompra(@PathVariable(value = "id") Long compraId) {
-	       Compra compra = compraService.obtenerCompra(compraId);
+	   @GetMapping("/getCompra/{id}")
+	   public ResponseEntity<Compra> getCompra(@PathVariable(value = "id") Long compraId) throws Exception {
+	       Compra compra = compraService.obtenerCompraById(compraId);
 	       return ResponseEntity.ok().body(compra);
 	   }
 
 
-	   @GetMapping("/getCompras")
+	   @GetMapping("/getComprasList")
 	   public ResponseEntity<List<Compra>> getAllCompras() {
 	       List<Compra> compraList = compraService.obtenerTodasLasCompras();
 	       return ResponseEntity.ok().body(compraList);
@@ -43,14 +44,13 @@ public class CompraController {
 	       return ResponseEntity.ok().body(nuevaCompra);
 	   }
 
-	 //revisar pasar dato a ser modificado por param
-	   @PutMapping("/updateTotalCompra")
-	   public ResponseEntity<Compra> updateTotalCompra(@RequestBody Compra compra) {
-		   Compra compraModificada = compraService.modificarTotalCompra(compra);
-	       return ResponseEntity.ok().body(compraModificada);
+	   @PutMapping("/updateTotalCompraById")
+	   public void updateTotalCompra(@Param("id") Long id, @Param("total") double total) throws Exception {
+		  compraService.modificarTotalCompraById(id, total);
+	       
 	   }
 
-	   @DeleteMapping("/deleteCompra/{id}")
+	   @DeleteMapping("/deleteCompraById/{id}")
 	   public void deleteCompra(@PathVariable(value = "id") Long compraId) {
 		   compraService.borrarCompra(compraId);
 	   }

@@ -8,11 +8,11 @@ public interface ItemService {
 	
 	Item crearItem(Item item);
 
-	Item modificarCantidadItem(Item item);
+	void modificarCantidadItemById(Long id, int cant) throws Exception;
 
-	void borrarItem(Long id);
+	void borrarItem(Long id) throws Exception;
 
-	Item obtenerItem(Long id);
+	Item obtenerItemPorId(Long id) throws Exception;
 
 	List<Item> obtenerTodosLosItems();
 

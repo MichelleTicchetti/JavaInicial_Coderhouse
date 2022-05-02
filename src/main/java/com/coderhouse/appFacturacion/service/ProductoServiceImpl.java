@@ -1,11 +1,9 @@
 package com.coderhouse.appFacturacion.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.coderhouse.appFacturacion.entity.Producto;
@@ -50,9 +48,9 @@ public class ProductoServiceImpl implements ProductoService {
 		log.info("Se va a borrar el producto {}", producto.getNombre());
 	}
 
-	public Producto obtenerProductoPorNombre(String nombre){
+	public List <Producto> obtenerProductosPorNombre(String nombre){
 		
-			return productoRepository.findByNombre(nombre);
+			return productoRepository.findAllByNombre(nombre);
 						
 	}
 		

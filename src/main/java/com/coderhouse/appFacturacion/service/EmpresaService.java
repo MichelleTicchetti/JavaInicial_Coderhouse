@@ -8,11 +8,9 @@ public interface EmpresaService {
 
 	Empresa crearEmpresa(Empresa empresa);
 
-	Empresa modificarRazonSocial(Empresa empresa);
+	void borrarEmpresa(Long id) throws Exception;
 
-	void borrarEmpresa(Long id);
-
-	Empresa obtenerEmpresa(Long id);
+	Empresa obtenerEmpresaPorId(Long id) throws Exception;
 
 	List<Empresa> obtenerTodasLasEmpresas();
 

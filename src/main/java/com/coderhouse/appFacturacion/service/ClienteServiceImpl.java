@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.coderhouse.appFacturacion.entity.Cliente;
-import com.coderhouse.appFacturacion.entity.Producto;
 import com.coderhouse.appFacturacion.dto.ClienteDto;
 import com.coderhouse.appFacturacion.repository.ClienteRepository;
 
@@ -70,9 +69,9 @@ public class ClienteServiceImpl implements ClienteService {
 		return clienteRepository.findAll();
 	}
 
-	public ClienteDto obtenerEdadClienteDto(Long id) {
+	public ClienteDto obtenerEdadClienteDto(Long id) throws Exception {
 		
-		Cliente cliente = clienteRepository.findById(id).orElseThrow(RuntimeException::new);
+		Cliente cliente = obtenerClientePorId(id);
 
 		LocalDate fechaNacimiento = cliente.getFechaNacimiento();
 

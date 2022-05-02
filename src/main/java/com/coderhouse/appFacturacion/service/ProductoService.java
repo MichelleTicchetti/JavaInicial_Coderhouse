@@ -13,7 +13,7 @@ public interface ProductoService {
 
 	void borrarProducto(Long id) throws Exception;
 	
-	Producto obtenerProductoPorNombre(String nombre);
+	List<Producto> obtenerProductosPorNombre(String nombre);
 	
 	Producto obtenerProductoPorId(Long id) throws Exception;
 

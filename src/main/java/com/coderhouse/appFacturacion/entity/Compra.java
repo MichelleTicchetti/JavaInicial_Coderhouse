@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,12 +32,13 @@ public class Compra {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "La fecha de la compra es obligatoria")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	@Column(name = "FECHA")
 	private Date fechaCompra;
 	
-	@NotBlank(message = "El precio total de la compra es obligatorio")
+	@Min(0)
 	@Column(name = "PRECIO_TOTAL")
+	@NotNull
 	private double precioTotal;
 	
 	@ManyToOne
