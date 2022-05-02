@@ -1,0 +1,819 @@
+{
+	"info": {
+		"_postman_id": "d8e11963-0301-42c6-8950-2464dd927062",
+		"name": "Coderhouse Java Michelle Ticchetti",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "GetClienteById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getCliente/id/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getCliente",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetClienteByNombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getCliente/nombre/Maria",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getCliente",
+								"nombre",
+								"Maria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetClientesList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getClientes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getClientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateCliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nombre\": \"Cliente\",\r\n        \"apellido\": \"Creado\",\r\n        \"fechaNacimiento\": \"2000-10-25\",\r\n        \"dni\": \"30598356\",\r\n        \"direccion\": \"Av Santa Fe 5215 2C\",\r\n        \"telefono\": \"1166289546\",\r\n        \"email\": \"cliente.creado@gmail.com\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/createCliente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"createCliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTelefonoClienteById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/updateClienteTelefono?id=1&tel=1165945223",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"updateClienteTelefono"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								},
+								{
+									"key": "tel",
+									"value": "1165945223"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteClienteById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/deleteCliente/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteCliente",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEdadClienteById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getEdadCliente/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getEdadCliente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Producto",
+			"item": [
+				{
+					"name": "GetProductosByNombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getProductoByNombre?nombre=FIFA2022",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getProductoByNombre"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "FIFA2022"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductoById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getProductoById/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getProductoById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductosList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getProductos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getProductos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateProducto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nombre\": \"Producto Creado\",\r\n        \"descripcion\": \"Edición especial\",\r\n        \"plataforma\": \"PS4\",\r\n        \"precio\": 5999.0,\r\n        \"categoria\": \"Accion\",\r\n        \"stock\": 200\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/createProducto",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"createProducto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProductoById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/deleteProducto/11",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteProducto",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdatePrecioProductoById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/updatePrecioProducto?id=1&precio=5998",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"updatePrecioProducto"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								},
+								{
+									"key": "precio",
+									"value": "5998"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateStockProductoById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/updateStockProducto?id=12&cant=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"updateStockProducto"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "12"
+								},
+								{
+									"key": "cant",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductoByPlataforma",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getProductosPlataforma?plataforma=PS4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getProductosPlataforma"
+							],
+							"query": [
+								{
+									"key": "plataforma",
+									"value": "PS4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductoByCategoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getProductosCategoria?categoria=Accion",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getProductosCategoria"
+							],
+							"query": [
+								{
+									"key": "categoria",
+									"value": "Accion"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Empresa",
+			"item": [
+				{
+					"name": "GetEmpresaById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getEmpresaById/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getEmpresaById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetEmpresasList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getEmpresasList",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getEmpresasList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateEmpresa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "   {\r\n        \"razonSocial\": \"Gaming.SA_Test\",\r\n        \"rubro\": \"Comercio de videojuegos\",\r\n        \"cuit\": \"27280335149\",\r\n        \"sucursales\": []\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/createEmpresa",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"createEmpresa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteEmpresaById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/deleteEmpresa/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteEmpresa",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Compra",
+			"item": [
+				{
+					"name": "GetComprasList",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/getComprasList",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getComprasList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateCompra",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{      \"fechaCompra\": \"2019-06-14 13:07:21\",\r\n        \"precioTotal\": 10000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/createCompra",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"createCompra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCompraById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getCompra/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getCompra",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCompraById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/updateTotalCompraById?id=1&total=16000",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"updateTotalCompraById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								},
+								{
+									"key": "total",
+									"value": "16000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCompraById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/deleteCompraById/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteCompraById",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Item",
+			"item": [
+				{
+					"name": "CreateItem",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{      \"cantidad\": \"3\",\r\n        \"precioSubTotal\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/createItem",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"createItem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetItemsList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getItemsList",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getItemsList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteItem",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/deleteItem/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteItem",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCantidadItemById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/updateCantidadItem?id=1&cant=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"updateCantidadItem"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								},
+								{
+									"key": "cant",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sucursal",
+			"item": [
+				{
+					"name": "GetSucursalesList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getSucursales",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getSucursales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateSucursal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n        \"nombre\": \"Munro\",\r\n        \"direccion\": \"Ramon CASTRO 4897\",\r\n        \"telefono\": \"47793652\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/createSucursal",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"createSucursal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateDireccionSucursal",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/updateDireccionSucursal?id=3&direccion=Ramon Castro 5555",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"updateDireccionSucursal"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								},
+								{
+									"key": "direccion",
+									"value": "Ramon Castro 5555"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTelefonoSucursal",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/updateTelefonoSucursal?id=2&tel=47586525",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"updateTelefonoSucursal"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								},
+								{
+									"key": "tel",
+									"value": "47586525"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteSucursal",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/deleteSucursal/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deleteSucursal",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
