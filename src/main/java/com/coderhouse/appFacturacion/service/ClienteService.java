@@ -9,11 +9,11 @@ public interface ClienteService {
 
 	Cliente crearCliente(Cliente cliente);
 
-	Cliente modificarTelefonoCliente(Long id, String tel);
+	void modificarTelefonoCliente(Long id, String tel) throws Exception;
 
-	void borrarCliente(Long id);
+	void borrarCliente(Long id) throws Exception;
 
-	Cliente obtenerCliente(Long id);
+	Cliente obtenerClientePorId(Long id) throws Exception;
 	
 	Cliente obtenerClientePorNombre(String nombre);
 

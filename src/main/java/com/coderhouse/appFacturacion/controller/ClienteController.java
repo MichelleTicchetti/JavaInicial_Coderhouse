@@ -26,8 +26,8 @@ public class ClienteController {
 	   ClienteService clienteService;
 
 	   @GetMapping("/getCliente/id/{id}")
-	   public ResponseEntity<Cliente> getCliente(@PathVariable(value = "id") Long clienteId) {
-	       Cliente cliente = clienteService.obtenerCliente(clienteId);
+	   public ResponseEntity<Cliente> getCliente(@PathVariable(value = "id") Long clienteId) throws Exception {
+	       Cliente cliente = clienteService.obtenerClientePorId(clienteId);
 	       return ResponseEntity.ok().body(cliente);
 	   }
 	   
@@ -50,13 +50,12 @@ public class ClienteController {
 	   }
 
 	   @PutMapping("/updateClienteTelefono")
-	   public ResponseEntity<Cliente> updateClienteTelefono(@Param("id") Long id, @Param("tel") String tel) {
-	       Cliente clienteModificado = clienteService.modificarTelefonoCliente(id, tel);
-	       return ResponseEntity.ok().body(clienteModificado);
+	   public void updateClienteTelefono(@Param("id") Long id, @Param("tel") String tel) throws Exception {
+	      clienteService.modificarTelefonoCliente(id, tel);
 	   }
 
 	   @DeleteMapping("/deleteCliente/{id}")
-	   public void deleteCliente(@PathVariable(value = "id") Long clienteId) {
+	   public void deleteCliente(@PathVariable(value = "id") Long clienteId) throws Exception {
 	        clienteService.borrarCliente(clienteId);
 	   }
 	   

@@ -1,7 +1,6 @@
 package com.coderhouse.appFacturacion.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -33,8 +32,8 @@ public class ProductoController {
 	}
 	
 	@GetMapping("/getProductoById/{id}")
-	public ResponseEntity<Optional<Producto>> getProductoById(@PathVariable(value = "id") Long productoId) throws Exception {
-		Optional <Producto> producto = productoService.obtenerProductoPorId(productoId);
+	public ResponseEntity<Producto> getProductoById(@PathVariable(value = "id") Long productoId) throws Exception {
+		Producto producto = productoService.obtenerProductoPorId(productoId);
 		return ResponseEntity.ok().body(producto);
 	}
 
@@ -44,6 +43,19 @@ public class ProductoController {
 		return ResponseEntity.ok().body(productoList);
 	}
 
+	@GetMapping("/getProductosPlataforma")
+	public ResponseEntity<List<Producto>> getAllProductosPlataforma(@Param("plataforma") String plataforma) {
+		List<Producto> productoList = productoService.obtenerProductosPorPlataforma(plataforma);
+		return ResponseEntity.ok().body(productoList);
+	}
+	
+	@GetMapping("/getProductosCategoria")
+	public ResponseEntity<List<Producto>> getAllProductosCategoria(@Param("categoria") String categoria) {
+		List<Producto> productoList = productoService.obtenerProductosPorCategoria(categoria);
+		return ResponseEntity.ok().body(productoList);
+	}
+
+	
 	@PostMapping("/createProducto")
 	public ResponseEntity<Producto> createProducto(@RequestBody Producto producto) {
 		Producto nuevoProducto = productoService.crearProducto(producto);
@@ -51,20 +63,19 @@ public class ProductoController {
 	}
 
 	@PutMapping("/updatePrecioProducto")
-	public ResponseEntity<Producto> updatePrecioProducto(@Param("id") Long id, @Param("precio") double precio) {
-		Producto productoModificado = productoService.modificarPrecioProducto(id, precio);
-		return ResponseEntity.ok().body(productoModificado);
+	public void updatePrecioProducto(@Param("id") Long id, @Param("precio") double precio) throws Exception {
+		productoService.modificarPrecioProducto(id, precio);
+		
 	}
 
 	@DeleteMapping("/deleteProducto/{id}")
-	public void deleteProducto(@PathVariable(value = "id") Long productoId) {
+	public void deleteProducto(@PathVariable(value = "id") Long productoId) throws Exception {
 		productoService.borrarProducto(productoId);
 	}
 
 	@PutMapping("/updateStockProducto")
-	public ResponseEntity<Producto> restarStockProducto(@Param("id") Long id, @Param("cant") int cant) {
-		Producto productoModificado = productoService.restarStock(id, cant);
-		return ResponseEntity.ok().body(productoModificado);
+	public void restarStockProducto(@Param("id") Long id, @Param("cant") int cant) throws Exception {
+		productoService.restarStock(id, cant);
 	}
 
 }

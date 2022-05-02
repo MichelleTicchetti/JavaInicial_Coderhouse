@@ -1,9 +1,11 @@
 package com.coderhouse.appFacturacion.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.coderhouse.appFacturacion.entity.Producto;
@@ -22,57 +24,100 @@ public class ProductoServiceImpl implements ProductoService {
 		return productoRepository.save(producto);
 	}
 
-	public Producto modificarPrecioProducto(Long id, double precio) {
-		Producto productoModificado = productoRepository.getById(id);
-		productoModificado.setPrecio(precio);
-		return productoRepository.save(productoModificado);
-
-	}
-
-	public void borrarProducto(Long id) {
-		Producto producto = productoRepository.getById(id);
-		productoRepository.deleteById(id);
-		log.info("Se va a borrar el producto {}", producto.getId());
-	}
-
-	public Producto obtenerProductoPorNombre(String nombre) {
-		return productoRepository.findByNombre(nombre);
-	}
+	public void modificarPrecioProducto(Long id, double precio) throws Exception {
+		
+		Producto productoModificado = obtenerProductoPorId(id);
+		
+		if(precio > 0) {
+			
+			productoModificado.setPrecio(precio);
+			log.info("Se ha modificado el precio del producto "+productoModificado.getNombre() + " a $" + precio);
+			productoRepository.save(productoModificado);
+			
+		} else {
+			
+			log.info("No se puede ingresar número negativo");
+			
+		}
+		
 	
-	public Optional<Producto> obtenerProductoPorId(Long id) throws Exception {
+	}
+
+	public void borrarProducto(Long id) throws Exception  {
 		
-		Optional<Producto> producto = productoRepository.findById(id);
+		Producto producto = obtenerProductoPorId(id);
+		productoRepository.deleteById(id);
+		log.info("Se va a borrar el producto {}", producto.getNombre());
+	}
+
+	public Producto obtenerProductoPorNombre(String nombre){
 		
-		if(producto.isPresent()) {
-			return productoRepository.findById(id);
-		}else {
+			return productoRepository.findByNombre(nombre);
+						
+	}
+		
+	public Producto obtenerProductoPorId(Long id) throws Exception {
+
+		Optional <Producto> producto = productoRepository.findById(id);
+
+		if (producto.isPresent()) {
+			
+			return producto.get();
+			
+		} else {
+			
 			throw new Exception("No existe ese producto en la bd");
 		}
 
-	
 	}
 
 	public List<Producto> obtenerTodosLosProductos() {
 		return productoRepository.findAll();
 	}
 
-	public Producto restarStock(Long id, int cant) {
+	public void restarStock(Long id, int cant) throws Exception {
 
-		Producto productoModificado = productoRepository.getById(id);
+		Optional<Producto> producto = productoRepository.findById(id);
 
-		if (productoModificado.getStock() >= cant) {
+		if (producto.isPresent()) {
+			
+			Producto productoModificado = producto.get();
 
-			productoModificado.setStock(productoModificado.getStock() - cant);
+			if (cant > 0) {
+		
+
+				if (productoModificado.getStock() >= cant) {
+
+					productoModificado.setStock(productoModificado.getStock() - cant);
+					productoRepository.save(productoModificado);
+					
+					
+				} else {
+					log.info("No hay suficiente stock. Stock disponible para " + productoModificado.getNombre() + ":"
+							+ productoModificado.getStock());
+				}
+
+			} else {
+				
+				log.info("No se puede ingresar número negativo");
+			}
 
 		} else {
 
-			log.info("No hay suficiente stock. Stock disponible para " + productoModificado.getNombre() + ":"
-					+ productoModificado.getStock());
+			throw new Exception("No existe ese producto en la bd");
 		}
-		
-		return productoRepository.save(productoModificado);
 
 		
+
 	}
+
+	public List<Producto> obtenerProductosPorPlataforma(String plataforma) {
+		return productoRepository.findAllByPlataforma(plataforma);
+	}
+
+	public List<Producto> obtenerProductosPorCategoria(String categoria) {
+		return productoRepository.findAllByCategoria(categoria);
+	}
+
 
 }

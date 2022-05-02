@@ -34,18 +34,15 @@ public class Producto {
 	@NotBlank(message = "La plataforma es obligatoria")
 	@Column(name = "PLATAFORMA")
 	private String plataforma;	
-		
-
+	
 	@Min(1)
 	@Column(name = "PRECIO_UNITARIO")
 	private double precio;
-	
 	
 	@NotBlank(message = "La categoria del producto es obligatoria")
 	@Column(name = "CATEGORIA")
 	private String categoria;
 	
-
 	@Min(0)
 	@Column(name = "STOCK")
 	private int stock;
