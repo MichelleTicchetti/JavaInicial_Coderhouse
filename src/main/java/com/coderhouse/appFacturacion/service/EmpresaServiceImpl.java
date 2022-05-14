@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.coderhouse.appFacturacion.entity.Empresa;
+import com.coderhouse.appFacturacion.exception.DbException;
 import com.coderhouse.appFacturacion.repository.EmpresaRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,7 @@ public class EmpresaServiceImpl implements EmpresaService{
 		log.info("Se va a borrar la empresa {}",empresa.getRazonSocial().toUpperCase());
 	}
 
-	public Empresa obtenerEmpresaPorId(Long id) throws Exception {
+	public Empresa obtenerEmpresaPorId(Long id) {
 		
 		Optional <Empresa> empresa = empresaRepository.findById(id);
 
@@ -38,7 +39,7 @@ public class EmpresaServiceImpl implements EmpresaService{
 			
 		} else {
 			
-			throw new Exception("No existe esa empresa en la bd");
+			throw new DbException("No existe esa empresa en la bd");
 		}
 		
 	}

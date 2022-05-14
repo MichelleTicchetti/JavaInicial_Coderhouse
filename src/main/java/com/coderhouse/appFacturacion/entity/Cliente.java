@@ -1,18 +1,22 @@
 package com.coderhouse.appFacturacion.entity;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Table(name = "CLIENTES")
-@Entity
-@Data
+@Entity(name = "CLIENTE")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cliente {
@@ -49,14 +53,9 @@ public class Cliente {
 	@Column(name = "EMAIL")
 	private String email;
 	
-	@ManyToMany(mappedBy="clientes")
-	private Set<Sucursal>sucursales;
-	
-	
-	@OneToMany(mappedBy="cliente")
-	private Set<Compra> compras;
-	
-	
+	@JsonIgnore
+	@OneToMany(mappedBy="cliente", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Factura> facturas;	
 
 
 

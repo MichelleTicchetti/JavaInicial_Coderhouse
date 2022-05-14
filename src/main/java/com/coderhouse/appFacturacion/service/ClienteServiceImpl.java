@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.coderhouse.appFacturacion.entity.Cliente;
+import com.coderhouse.appFacturacion.entity.Factura;
+import com.coderhouse.appFacturacion.exception.DbException;
 import com.coderhouse.appFacturacion.dto.ClienteDto;
 import com.coderhouse.appFacturacion.repository.ClienteRepository;
 
@@ -23,54 +25,71 @@ public class ClienteServiceImpl implements ClienteService {
 	ClienteRepository clienteRepository;
 
 	public Cliente crearCliente(Cliente cliente) {
+
+		
 		return clienteRepository.save(cliente);
+
 	}
 
-	public void modificarTelefonoCliente(Long id, String tel) throws Exception {
+	public Cliente buscarOCrearCliente(Cliente cliente) {
 		
-		Cliente clienteModificado = obtenerClientePorId(id);
+		Optional<Cliente> miCliente = clienteRepository.findById(cliente.getId());
 		
-		if(Pattern.matches("^[0-9]{2,3}[0-9]{4}[0-9]{4}$", tel)) {
-			clienteModificado.setTelefono(tel);
-			log.info("Se ha modificado el telefono de " + clienteModificado.getApellido().toUpperCase()+ ", " + clienteModificado.getNombre());
-			clienteRepository.save(clienteModificado);
-		}else {
+		if (miCliente.isPresent()) {
+
+			return miCliente.get();
+
+		} else {
 			
-			throw new Exception("El formato de teléfono no es valido. No debe contener espacios ni carácteres especiales.");
+			return this.crearCliente(cliente);
 		}
 		
-		
+	}
+
+	public void modificarTelefonoCliente(Long id, String tel) {
+
+		Cliente clienteModificado = obtenerClientePorId(id);
+
+		if (Pattern.matches("^[0-9]{2,3}[0-9]{4}[0-9]{4}$", tel)) {
+			clienteModificado.setTelefono(tel);
+			log.info("Se ha modificado el telefono de " + clienteModificado.getApellido().toUpperCase() + ", "
+					+ clienteModificado.getNombre());
+			clienteRepository.save(clienteModificado);
+		} else {
+
+			throw new DbException(
+					"El formato de teléfono no es valido. No debe contener espacios ni carácteres especiales.");
+		}
 
 	}
 
-	public void borrarCliente(Long id) throws Exception {
+	public void borrarCliente(Long id) {
 		Cliente cliente = obtenerClientePorId(id);
-		log.info("Se va a borrar el cliente {}", cliente.getApellido().toUpperCase()+", "+cliente.getNombre());
+		log.info("Se va a borrar el cliente {}", cliente.getApellido().toUpperCase() + ", " + cliente.getNombre());
 		clienteRepository.deleteById(id);
 	}
 
-	public Cliente obtenerClientePorId(Long id) throws Exception {
-		
-		Optional <Cliente> cliente = clienteRepository.findById(id);
+	public Cliente obtenerClientePorId(Long id) {
+
+		Optional<Cliente> cliente = clienteRepository.findById(id);
 
 		if (cliente.isPresent()) {
-			
+
 			return cliente.get();
-			
+
 		} else {
-			
-			throw new Exception("No existe ese cliente en la bd");
+
+			throw new DbException("No existe ese cliente en la bd");
 		}
 
-		
 	}
 
 	public List<Cliente> obtenerTodosLosClientes() {
 		return clienteRepository.findAll();
 	}
 
-	public ClienteDto obtenerEdadClienteDto(Long id) throws Exception {
-		
+	public ClienteDto obtenerEdadClienteDto(Long id) {
+
 		Cliente cliente = obtenerClientePorId(id);
 
 		LocalDate fechaNacimiento = cliente.getFechaNacimiento();
@@ -86,7 +105,27 @@ public class ClienteServiceImpl implements ClienteService {
 
 	public Cliente obtenerClientePorNombre(String nombre) {
 		return clienteRepository.findByNombre(nombre);
+	}
 
+	public Cliente obtenerClientePorDni(Cliente cliente) {
+
+		Optional<Cliente> clienteBuscado = Optional.ofNullable(clienteRepository.findByDni(cliente.getDni()));
+
+		if (clienteBuscado.isPresent()) {
+			log.info("Ya existe el cliente");
+			return clienteBuscado.get();
+		} else {
+			log.info("Se guarda nuevo cliente");
+			return this.crearCliente(cliente);
+		}
+
+	}
+
+	public List<Factura> obtenerFacturasPorIdCliente(Long id) {
+		
+		Cliente cliente = obtenerClientePorId(id);
+	
+		return cliente.getFacturas();
 	}
 
 }
