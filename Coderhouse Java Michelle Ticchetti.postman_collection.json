@@ -34,15 +34,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/getCliente/nombre/Maria",
+							"raw": "localhost:8080/getCliente/nombre?nombre=Maria",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"getCliente",
-								"nombre",
-								"Maria"
+								"nombre"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "Maria"
+								}
 							]
 						}
 					},
@@ -153,6 +158,55 @@
 							"port": "8080",
 							"path": [
 								"getEdadCliente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getClientByDni",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Julieta\",\r\n    \"apellido\": \"Ventura\",\r\n    \"fechaNacimiento\": \"2002-02-11\",\r\n    \"dni\": \"45968563\",\r\n    \"direccion\": \"Av. Las Heras 6953\",\r\n    \"telefono\": \"1166631558\",\r\n    \"email\": \"juliva@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/getClienteDni",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getClienteDni"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFacturasCliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getFacturasPorCliente/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getFacturasPorCliente",
 								"1"
 							]
 						}
@@ -374,6 +428,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "getProductoByNombreYPlataforma",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/getProductoByNombreYPlataforma?nombre=FIFA2022&plataforma=PS4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"getProductoByNombreYPlataforma"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "FIFA2022"
+								},
+								{
+									"key": "plataforma",
+									"value": "PS4"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -466,135 +548,7 @@
 			]
 		},
 		{
-			"name": "Compra",
-			"item": [
-				{
-					"name": "GetComprasList",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/getComprasList",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"getComprasList"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CreateCompra",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{      \"fechaCompra\": \"2019-06-14 13:07:21\",\r\n        \"precioTotal\": 10000\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/createCompra",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"createCompra"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetCompraById",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/getCompra/1",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"getCompra",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UpdateCompraById",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/updateTotalCompraById?id=1&total=16000",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"updateTotalCompraById"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								},
-								{
-									"key": "total",
-									"value": "16000"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteCompraById",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/deleteCompraById/2",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"deleteCompraById",
-								"2"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Item",
+			"name": "DetalleFactura",
 			"item": [
 				{
 					"name": "CreateItem",
@@ -691,34 +645,16 @@
 			]
 		},
 		{
-			"name": "Sucursal",
+			"name": "Factura",
 			"item": [
 				{
-					"name": "GetSucursalesList",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/getSucursales",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"getSucursales"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CreateSucursal",
+					"name": "facturarClienteNuevo",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "  {\r\n        \"nombre\": \"Munro\",\r\n        \"direccion\": \"Ramon CASTRO 4897\",\r\n        \"telefono\": \"47793652\"\r\n    }",
+							"raw": "{\r\n    \"cliente\": {\r\n    \"id\": 6,\r\n    \"nombre\": \"Cliente\",\r\n    \"apellido\": \"Nuevo\",\r\n    \"fechaNacimiento\": \"1957-10-25\",\r\n    \"dni\": \"30598653\",\r\n    \"direccion\": \"Av Santa Fe 2562 2C\",\r\n    \"telefono\": \"1165945223\",\r\n    \"email\": \"nuevoCliente@gmail.com\"\r\n    },\r\n    \"idEmpresa\": 1,\r\n    \"detalleFacturaDtos\": [\r\n      {\r\n          \"nombreProducto\": \"Minecraft\",\r\n          \"plataformaProducto\": \"PS4\",\r\n        \"cantidad\": 2\r\n      },\r\n      {\r\n        \"nombreProducto\": \"FIFA2022\",\r\n        \"plataformaProducto\": \"PS4\",\r\n        \"cantidad\": 1\r\n       },\r\n       {\r\n        \"nombreProducto\": \"FIFA2022\",\r\n        \"plataformaProducto\": \"XBOX ONE\",\r\n        \"cantidad\": 3\r\n       }\r\n    ]\r\n} \r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -726,88 +662,104 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/createSucursal",
+							"raw": "localhost:8080/facturarCompraDto",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"createSucursal"
+								"facturarCompraDto"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "UpdateDireccionSucursal",
+					"name": "facturarClienteExistente",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
-						"url": {
-							"raw": "localhost:8080/updateDireccionSucursal?id=3&direccion=Ramon Castro 5555",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"updateDireccionSucursal"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "3"
-								},
-								{
-									"key": "direccion",
-									"value": "Ramon Castro 5555"
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cliente\": {\r\n    \"id\": 1,\r\n        \"nombre\": \"Luis\",\r\n        \"apellido\": \"Carrasco\",\r\n        \"fechaNacimiento\": \"1957-10-25\",\r\n        \"dni\": \"30598653\",\r\n        \"direccion\": \"Av Santa Fe 2562 2C\",\r\n        \"telefono\": \"1165945223\",\r\n        \"email\": \"luis.carrasco@gmail.com\"\r\n    },\r\n    \"idEmpresa\": 1,\r\n    \"detalleFacturaDtos\": [\r\n      {\r\n          \"nombreProducto\": \"Dying Light\",\r\n          \"plataformaProducto\": \"PS4\",\r\n        \"cantidad\": 1\r\n      }\r\n    ]\r\n} \r\n",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/facturarCompraDto",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"facturarCompraDto"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "UpdateTelefonoSucursal",
+					"name": "getFacturasList",
 					"request": {
-						"method": "PUT",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/updateTelefonoSucursal?id=2&tel=47586525",
+							"raw": "localhost:8080/getFacturasList",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"updateTelefonoSucursal"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "2"
-								},
-								{
-									"key": "tel",
-									"value": "47586525"
+								"getFacturasList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "otraCompraClienteExistente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cliente\": {\r\n    \"id\": 1,\r\n        \"nombre\": \"Luis\",\r\n        \"apellido\": \"Carrasco\",\r\n        \"fechaNacimiento\": \"1957-10-25\",\r\n        \"dni\": \"30598653\",\r\n        \"direccion\": \"Av Santa Fe 2562 2C\",\r\n        \"telefono\": \"1165945223\",\r\n        \"email\": \"luis.carrasco@gmail.com\"\r\n    },\r\n    \"idEmpresa\": 1,\r\n    \"detalleFacturaDtos\": [\r\n      {\r\n          \"nombreProducto\": \"BioShock\",\r\n          \"plataformaProducto\": \"Nintendo Switch\",\r\n        \"cantidad\": 1\r\n      }\r\n    ]\r\n} \r\n",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/facturarCompraDto",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"facturarCompraDto"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DeleteSucursal",
+					"name": "getFacturaById",
 					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/deleteSucursal/3",
+							"raw": "localhost:8080/getFacturaById/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"deleteSucursal",
-								"3"
+								"getFacturaById",
+								"1"
 							]
 						}
 					},
