@@ -13,47 +13,47 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.coderhouse.appFacturacion.entity.Item;
-import com.coderhouse.appFacturacion.service.ItemService;
+import com.coderhouse.appFacturacion.entity.DetalleFactura;
+import com.coderhouse.appFacturacion.service.DetalleFacturaService;
 
 import lombok.Data;
 
 @Data
 @RestController
-public class ItemController {
+public class DetalleFacturaController {
 	
 	
 	@Autowired
-	ItemService itemService;
+	DetalleFacturaService itemService;
 
 	@GetMapping("/getItemById/{id}")
-	public ResponseEntity<Item> getItem(@PathVariable(value = "id") Long itemId) throws Exception {
-		Item item = itemService.obtenerItemPorId(itemId);
+	public ResponseEntity<DetalleFactura> getItem(@PathVariable(value = "id") Long itemId) throws Exception {
+		DetalleFactura item = itemService.obtenerDetalleFacturaPorId(itemId);
 		return ResponseEntity.ok().body(item);
 	}
 
 	@GetMapping("/getItemsList")
-	public ResponseEntity<List<Item>> getAllItems() {
-		List<Item> itemList = itemService.obtenerTodosLosItems();
+	public ResponseEntity<List<DetalleFactura>> getAllItems() {
+		List<DetalleFactura> itemList = itemService.obtenerTodosLosDetalleFactura();
 		return ResponseEntity.ok().body(itemList);
 	}
 
 	@PostMapping("/createItem")
-	public ResponseEntity<Item> createItem(@RequestBody Item item) {
-		Item nuevoItem = itemService.crearItem(item);
+	public ResponseEntity<DetalleFactura> createItem(@RequestBody DetalleFactura item) {
+		DetalleFactura nuevoItem = itemService.crearDetalleFactura(item);
 		return ResponseEntity.ok().body(nuevoItem);
 	}
 
 
 	@PutMapping("/updateCantidadItem")
 	public void updateCantidadItem(@Param("id") Long id, @Param("cant") int cant) throws Exception {
-		itemService.modificarCantidadItemById(id, cant);
+		itemService.modificarCantidadDetalleFacturaById(id, cant);
 		
 	}
 
 	@DeleteMapping("/deleteItem/{id}")
 	public void deleteItem(@PathVariable(value = "id") Long itemId) throws Exception {
-		itemService.borrarItem(itemId);
+		itemService.borrarDetalleFactura(itemId);
 	}
 
 

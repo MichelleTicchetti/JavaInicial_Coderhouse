@@ -37,6 +37,12 @@ public class ProductoController {
 		return ResponseEntity.ok().body(producto);
 	}
 
+	@GetMapping("/getProductoByNombreYPlataforma")
+	public ResponseEntity<Producto> getProductoByNombrePlataforma(@Param("nombre") String nombre, @Param("plataforma") String plataforma) throws Exception {
+		Producto producto = productoService.obtenerProductoPorNombreYPlataforma(nombre, plataforma);
+		return ResponseEntity.ok().body(producto);
+	}
+	
 	@GetMapping("/getProductos")
 	public ResponseEntity<List<Producto>> getAllProductos() {
 		List<Producto> productoList = productoService.obtenerTodosLosProductos();
@@ -63,18 +69,18 @@ public class ProductoController {
 	}
 
 	@PutMapping("/updatePrecioProducto")
-	public void updatePrecioProducto(@Param("id") Long id, @Param("precio") double precio) throws Exception {
+	public void updatePrecioProducto(@Param("id") Long id, @Param("precio") double precio) {
 		productoService.modificarPrecioProducto(id, precio);
 		
 	}
 
 	@DeleteMapping("/deleteProducto/{id}")
-	public void deleteProducto(@PathVariable(value = "id") Long productoId) throws Exception {
+	public void deleteProducto(@PathVariable(value = "id") Long productoId) {
 		productoService.borrarProducto(productoId);
 	}
 
 	@PutMapping("/updateStockProducto")
-	public void restarStockProducto(@Param("id") Long id, @Param("cant") int cant) throws Exception {
+	public void restarStockProducto(@Param("id") Long id, @Param("cant") int cant) {
 		productoService.restarStock(id, cant);
 	}
 

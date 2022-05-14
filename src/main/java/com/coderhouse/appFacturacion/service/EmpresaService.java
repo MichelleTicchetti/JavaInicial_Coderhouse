@@ -10,7 +10,7 @@ public interface EmpresaService {
 
 	void borrarEmpresa(Long id) throws Exception;
 
-	Empresa obtenerEmpresaPorId(Long id) throws Exception;
+	Empresa obtenerEmpresaPorId(Long id);
 
 	List<Empresa> obtenerTodasLasEmpresas();
 
